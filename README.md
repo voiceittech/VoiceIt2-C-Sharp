@@ -226,4 +226,4 @@ Stephen Akers, stephen@voiceit.io
 
 ## License
 
-VoiceItApi2AndroidSDK is available under the MIT license. See the LICENSE file for more info.
+VoiceIt2-C-Sharp is available under the MIT license. See the LICENSE file for more info.
