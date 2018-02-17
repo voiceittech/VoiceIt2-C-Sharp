@@ -44,7 +44,7 @@ This wrapper uses the RestSharp REST and HTTP Client package: https://www.nuget.
 
 ### Initialization
 
-First initialize a reference and pass in the API Credentials.
+First initialize a reference with the API Credentials.
 
 ```cs
 VoiceIt2 myVoiceIt = new VoiceIt2("API_KEY", "API_TOK");
