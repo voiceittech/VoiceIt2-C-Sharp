@@ -66,7 +66,7 @@ namespace VoiceIt2API
         {
             var request = new RestRequest
             {
-                Resource = "/users/groups/" + userId,
+                Resource = "/users/" + userId + "/groups",
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
