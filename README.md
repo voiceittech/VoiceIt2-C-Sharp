@@ -58,7 +58,7 @@ For each API call, you can use an awaiter to receive the result of the call.
 ```
 Such as:
 ```cs
-myVoiceIt.getAllUsers().GetAwaiter().GetResult();
+myVoiceIt.GetAllUsers().GetAwaiter().GetResult();
 ```
 
 ### User API Calls
@@ -67,35 +67,35 @@ myVoiceIt.getAllUsers().GetAwaiter().GetResult();
 
 Get all the users associated with the apiKey
 ```cs
-myVoiceIt.getAllUsers()
+myVoiceIt.GetAllUsers()
 ```
 
 #### Create User
 
 Create a new user
 ```cs
-myVoiceIt.createUser()
+myVoiceIt.CreateUser()
 ```
 
 #### Check if User Exists
 
 Check whether a user exists for the given userId(begins with 'usr_')
 ```cs
-myVoiceIt.getUser("USER_ID_HERE").
+myVoiceIt.GetUser("USER_ID_HERE").
 ```
 
 #### Delete User
 
 Delete user with given userId(begins with 'usr_')
 ```cs
-myVoiceIt.deleteUser("USER_ID_HERE")
+myVoiceIt.DeleteUser("USER_ID_HERE")
 ```
 
 #### Get Groups for User
 
 Get a list of groups that the user with given userId(begins with 'usr_') is a part of
 ```cs
-myVoiceIt.getGroupsForUser("USER_ID_HERE")
+myVoiceIt.GetGroupsForUser("USER_ID_HERE")
 ```
 
 ### Group API Calls
@@ -104,35 +104,35 @@ myVoiceIt.getGroupsForUser("USER_ID_HERE")
 
 Get all the groups associated with the apiKey
 ```cs
-myVoiceIt.getAllGroups()
+myVoiceIt.GetAllGroups()
 ```
 
 #### Get Group
 
 Returns a group for the given groupId(begins with 'grp_')
 ```cs
-myVoiceIt.getGroup("GROUP_ID_HERE")
+myVoiceIt.GetGroup("GROUP_ID_HERE")
 ```
 
 #### Check if Group Exists
 
 Checks if group with given groupId(begins with 'grp_') exists
 ```cs
-myVoiceIt.groupExists("GROUP_ID_HERE")
+myVoiceIt.GroupExists("GROUP_ID_HERE")
 ```
 
 #### Create Group
 
 Create a new group with the given description
 ```cs
-myVoiceIt.createGroup("Sample Group Description")
+myVoiceIt.CreateGroup("Sample Group Description")
 ```
 
 #### Add User to Group
 
 Adds user with given userId(begins with 'usr_') to group with given groupId(begins with 'grp_')
 ```cs
-myVoiceIt.addUserToGroup("GROUP_ID_HERE", "USER_ID_HERE")
+myVoiceIt.AddUserToGroup("GROUP_ID_HERE", "USER_ID_HERE")
 ```
 
 #### Remove User from Group
@@ -140,7 +140,7 @@ myVoiceIt.addUserToGroup("GROUP_ID_HERE", "USER_ID_HERE")
 Removes user with given userId(begins with 'usr_') from group with given groupId(begins with 'grp_')
 
 ```cs
-myVoiceIt.removeUserFromGroup( "GROUP_ID_HERE", "USER_ID_HERE")
+myVoiceIt.RemoveUserFromGroup( "GROUP_ID_HERE", "USER_ID_HERE")
 ```
 
 #### Delete Group
@@ -148,7 +148,7 @@ myVoiceIt.removeUserFromGroup( "GROUP_ID_HERE", "USER_ID_HERE")
 Delete group with given groupId(begins with 'grp_'), note: tThis call does not delete any users, but simply deletes the group and disassociates the users from the group
 
 ```cs
-myVoiceIt.deleteGroup("GROUP_ID_HERE")
+myVoiceIt.DeleteGroup("GROUP_ID_HERE")
 ```
 
 ### Enrollment API Calls
@@ -158,7 +158,7 @@ myVoiceIt.deleteGroup("GROUP_ID_HERE")
 Gets all enrollment for user with given userId(begins with 'usr_')
 
 ```cs
-myVoiceIt.getAllEnrollmentsForuser("USER_ID_HERE")
+myVoiceIt.GetAllEnrollmentsForuser("USER_ID_HERE")
 ```
 
 #### Delete Enrollment for User
@@ -166,7 +166,7 @@ myVoiceIt.getAllEnrollmentsForuser("USER_ID_HERE")
 Delete enrollment for user with given userId(begins with 'usr_') and enrollmentId(integer)
 
 ```cs
-myVoiceIt.deleteEnrollmentForUser( "USER_ID_HERE", "ENROLLMENT_ID_HERE")
+myVoiceIt.DeleteEnrollmentForUser( "USER_ID_HERE", "ENROLLMENT_ID_HERE")
 ```
 
 #### Create Voice Enrollment
@@ -174,7 +174,7 @@ myVoiceIt.deleteEnrollmentForUser( "USER_ID_HERE", "ENROLLMENT_ID_HERE")
 Create audio enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```cs
-myVoiceIt.createVoiceEnrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording);
+myVoiceIt.CreateVoiceEnrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording);
 ```
 
 #### Create Video Enrollment
@@ -182,7 +182,7 @@ myVoiceIt.createVoiceEnrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] 
 Create video enrollment for user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```cs
-myVoiceIt.createVideoEnrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video);
+myVoiceIt.CreateVideoEnrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video);
 ```
 
 ### Verification API Calls
@@ -192,14 +192,14 @@ myVoiceIt.createVideoEnrollment("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] 
 Verify user with the given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```cs
-myVoiceIt.voiceVerification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording)
+myVoiceIt.VoiceVerification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording)
 ```
 
 #### Video Verification
 
 Verify user with given userId(begins with 'usr_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 ```cs
-myVoiceIt.videoVerification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
+myVoiceIt.VideoVerification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
 ```
 
 ### Identification API Calls
@@ -209,7 +209,7 @@ myVoiceIt.videoVerification("USER_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] vide
 Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```cs
-myVoiceIt.voiceIdentification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording)
+myVoiceIt.VoiceIdentification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] recording)
 ```
 
 #### Video Identification
@@ -217,7 +217,7 @@ myVoiceIt.voiceIdentification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] r
 Identify user inside group with the given groupId(begins with 'grp_') and contentLanguage('en-US','es-ES' etc.). Note: File recording need to be no less than 1.2 seconds and no more than 5 seconds
 
 ```cs
-myVoiceIt.videoIdentification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
+myVoiceIt.VideoIdentification("GROUP_ID_HERE", "CONTENT_LANGUAGE_HERE", Byte[] video)
 ```
 
 ## Author
