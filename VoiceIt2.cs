@@ -136,7 +136,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content);
         }
 
-        public Task<string> CreateFaceEnrollment(string userId, string contentLanguage, Byte[] video)
+        public Task<string> CreateFaceEnrollment(string userId, Byte[] video)
         {
             var request = new RestRequest
             {
@@ -144,14 +144,13 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.POST
             };
             request.AddParameter("userId", userId);
-            request.AddParameter("contentLanguage", contentLanguage);
             request.AddFileBytes("video", video, "video");
 
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content);
         }
 
-        public Task<string> CreateFaceEnrollment(string userId, string contentLanguage, Byte[] video, bool doBlinkDetection)
+        public Task<string> CreateFaceEnrollment(string userId, Byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -159,7 +158,6 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.POST
             };
             request.AddParameter("userId", userId);
-            request.AddParameter("contentLanguage", contentLanguage);
             request.AddParameter("doBlinkDetection", doBlinkDetection);
             request.AddFileBytes("video", video, "video");
 
