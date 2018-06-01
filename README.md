@@ -38,7 +38,15 @@ Sign up for a free Developer Account at <a href="https://voiceit.io/signup" targ
 
 ## Installation
 
-This wrapper uses the RestSharp REST and HTTP Client package: https://www.nuget.org/packages/RestSharp/
+Please make sure you have the RestSharp REST and HTTP Client package: https://www.nuget.org/packages/RestSharp/
+```
+dotnet add package RestSharp --version 106.3.0
+```
+
+The VoiceIt2 module can easily be fetched from nuget: https://www.nuget.org/packages/VoiceIt/1.0.1get.
+```
+dotnet add package VoiceIt --version 1.0.1
+```
 
 ## API Calls
 
