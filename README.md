@@ -1,3 +1,4 @@
+<img src="./csharp.png" width="100%" style="width:100%">
 # VoiceIt2-C#
 
 A C# wrapper for VoiceIt's API 2.0 featuring Voice + Face Verification and Identification.
