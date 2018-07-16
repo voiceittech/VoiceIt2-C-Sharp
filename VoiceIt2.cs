@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -18,7 +19,7 @@ namespace VoiceIt2API
 
         }
 
-        public Task<string> GetAllUsers()
+        public string GetAllUsers()
         {
             var request = new RestRequest
             {
@@ -26,10 +27,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateUser()
+        public string CreateUser()
         {
             var request = new RestRequest
             {
@@ -37,10 +38,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.POST
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GetUser(string userId)
+        public string CheckUserExists(string userId)
         {
             var request = new RestRequest
             {
@@ -48,10 +49,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> DeleteUser(string userId)
+        public string DeleteUser(string userId)
         {
             var request = new RestRequest
             {
@@ -59,10 +60,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GetGroupsForUser(string userId)
+        public string GetGroupsForUser(string userId)
         {
             var request = new RestRequest
             {
@@ -70,10 +71,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GetAllEnrollmentsForUser(string userId)
+        public string GetAllEnrollmentsForUser(string userId)
         {
             var request = new RestRequest
             {
@@ -81,10 +82,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> DeleteAllEnrollmentsForUser(string userId)
+        public string DeleteAllEnrollmentsForUser(string userId)
         {
             var request = new RestRequest
             {
@@ -92,10 +93,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GetFaceEnrollmentsForUser(string userId)
+        public string GetFaceEnrollmentsForUser(string userId)
         {
             var request = new RestRequest
             {
@@ -103,10 +104,15 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateVoiceEnrollment(string userId, string contentLanguage, Byte[] recording)
+        public string CreateVoiceEnrollment(string userId, string contentLanguage, string recordingPath)
+        {
+            return CreateVoiceEnrollment(userId, contentLanguage, File.ReadAllBytes(recordingPath));
+        }
+
+        public string CreateVoiceEnrollment(string userId, string contentLanguage, byte[] recording)
         {
             var request = new RestRequest
             {
@@ -118,10 +124,10 @@ namespace VoiceIt2API
             request.AddFileBytes("recording", recording, "recording");
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateVoiceEnrollmentByUrl(string userId, string contentLanguage, string fileUrl)
+        public string CreateVoiceEnrollmentByUrl(string userId, string contentLanguage, string fileUrl)
         {
             var request = new RestRequest
             {
@@ -133,24 +139,25 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateFaceEnrollment(string userId, Byte[] video)
+        public string CreateFaceEnrollment(string userId, string videoPath)
         {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/face",
-                Method = RestSharp.Method.POST
-            };
-            request.AddParameter("userId", userId);
-            request.AddFileBytes("video", video, "video");
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return CreateFaceEnrollment(userId, File.ReadAllBytes(videoPath), false);
         }
 
-        public Task<string> CreateFaceEnrollment(string userId, Byte[] video, bool doBlinkDetection)
+        public string CreateFaceEnrollment(string userId, string videoPath, bool doBlinkDetection)
+        {
+            return CreateFaceEnrollment(userId, File.ReadAllBytes(videoPath), doBlinkDetection);
+        }
+
+        public string CreateFaceEnrollment(string userId, byte[] video)
+        {
+            return CreateFaceEnrollment(userId, video, false);
+        }
+
+        public string CreateFaceEnrollment(string userId, byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -162,25 +169,25 @@ namespace VoiceIt2API
             request.AddFileBytes("video", video, "video");
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateVideoEnrollment(string userId, string contentLanguage, Byte[] video)
+        public string CreateVideoEnrollment(string userId, string contentLanguage, string videoPath, bool doBlinkDetection)
         {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/video",
-                Method = RestSharp.Method.POST
-            };
-            request.AddParameter("userId", userId);
-            request.AddParameter("contentLanguage", contentLanguage);
-            request.AddFileBytes("video", video, "video");
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return CreateVideoEnrollment(userId, contentLanguage, File.ReadAllBytes(videoPath), doBlinkDetection);
         }
 
-        public Task<string> CreateVideoEnrollment(string userId, string contentLanguage, Byte[] video, bool doBlinkDetection)
+        public string CreateVideoEnrollment(string userId, string contentLanguage, string videoPath)
+        {
+            return CreateVideoEnrollment(userId, contentLanguage, File.ReadAllBytes(videoPath), false);
+        }
+
+        public string CreateVideoEnrollment(string userId, string contentLanguage, byte[] video)
+        {
+            return CreateVideoEnrollment(userId, contentLanguage, video, false);
+        }
+
+        public string CreateVideoEnrollment(string userId, string contentLanguage, byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -193,10 +200,10 @@ namespace VoiceIt2API
             request.AddFileBytes("video", video, "video");
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateVideoEnrollmentByUrl(string userId, string contentLanguage, string fileUrl)
+        public string CreateVideoEnrollmentByUrl(string userId, string contentLanguage, string fileUrl)
         {
             var request = new RestRequest
             {
@@ -208,10 +215,10 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateVideoEnrollmentByUrl(string userId, string contentLanguage, string fileUrl, bool doBlinkDetection)
+        public string CreateVideoEnrollmentByUrl(string userId, string contentLanguage, string fileUrl, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -224,21 +231,32 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> DeleteFaceEnrollment(string userId, string faceEnrollmentId)
+        public string DeleteFaceEnrollment(string userId, int faceEnrollmentId)
         {
             var request = new RestRequest
             {
-                Resource = "/enrollments/face/" + userId + "/" + faceEnrollmentId,
+                Resource = "/enrollments/face/" + userId + "/" + faceEnrollmentId.ToString(),
                 Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GetAllGroups()
+        public string DeleteEnrollmentForUser(string userId, int enrollmentId)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/enrollments/" + userId + "/" + enrollmentId.ToString(),
+                Method = RestSharp.Method.DELETE
+            };
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string GetAllGroups()
         {
             var request = new RestRequest
             {
@@ -246,10 +264,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GetGroup(string groupId)
+        public string GetGroup(string groupId)
         {
             var request = new RestRequest
             {
@@ -257,10 +275,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> GroupExists(string groupId)
+        public string GroupExists(string groupId)
         {
             var request = new RestRequest
             {
@@ -268,10 +286,10 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> CreateGroup(string description)
+        public string CreateGroup(string description)
         {
             var request = new RestRequest
             {
@@ -281,10 +299,10 @@ namespace VoiceIt2API
             request.AddParameter("description", description);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> AddUserToGroup(string groupId, string userId)
+        public string AddUserToGroup(string groupId, string userId)
         {
             var request = new RestRequest
             {
@@ -295,10 +313,10 @@ namespace VoiceIt2API
             request.AddParameter("userId", userId);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> RemoveUserFromGroup(string groupId, string userId)
+        public string RemoveUserFromGroup(string groupId, string userId)
         {
             var request = new RestRequest
             {
@@ -309,10 +327,10 @@ namespace VoiceIt2API
             request.AddParameter("userId", userId);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> DeleteGroup(string groupId)
+        public string DeleteGroup(string groupId)
         {
             var request = new RestRequest
             {
@@ -320,10 +338,15 @@ namespace VoiceIt2API
                 Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VoiceVerification(string userId, string contentLanguage, Byte[] recording)
+        public string VoiceVerification(string userId, string contentLanguage, string recordingPath)
+        {
+            return VoiceVerification(userId, contentLanguage, File.ReadAllBytes(recordingPath));
+        }
+
+        public string VoiceVerification(string userId, string contentLanguage, byte[] recording)
         {
             var request = new RestRequest
             {
@@ -335,10 +358,10 @@ namespace VoiceIt2API
             request.AddFileBytes("recording", recording, "recording");
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VoiceVerificationByUrl(string userId, string contentLanguage, string fileUrl)
+        public string VoiceVerificationByUrl(string userId, string contentLanguage, string fileUrl)
         {
             var request = new RestRequest
             {
@@ -350,24 +373,25 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> FaceVerification(string userId, byte[] video)
+        public string FaceVerification(string userId, string videoPath, bool doBlinkDetection)
         {
-            var request = new RestRequest
-            {
-                Resource = "/verification/face",
-                Method = RestSharp.Method.POST
-            };
-            request.AddParameter("userId", userId);
-            request.AddFileBytes("video", video, "video");
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return FaceVerification(userId, File.ReadAllBytes(videoPath), doBlinkDetection);
         }
 
-        public Task<string> FaceVerification(string userId, byte[] video, bool doBlinkDetection)
+        public string FaceVerification(string userId, string videoPath)
+        {
+            return FaceVerification(userId, File.ReadAllBytes(videoPath), false);
+        }
+
+        public string FaceVerification(string userId, byte[] video)
+        {
+            return FaceVerification(userId, video, false);
+        }
+
+        public string FaceVerification(string userId, byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -379,25 +403,25 @@ namespace VoiceIt2API
             request.AddParameter("doBlinkDetection", doBlinkDetection);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VideoVerification(string userId, string contentLanguage, byte[] video)
+        public string VideoVerification(string userId, string contentLanguage, string videoPath, bool doBlinkDetection)
         {
-            var request = new RestRequest
-            {
-                Resource = "/verification/video",
-                Method = RestSharp.Method.POST
-            };
-            request.AddParameter("userId", userId);
-            request.AddParameter("contentLanguage", contentLanguage);
-            request.AddFileBytes("video", video, "video");
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return VideoVerification(userId, contentLanguage, File.ReadAllBytes(videoPath), doBlinkDetection);
         }
 
-        public Task<string> VideoVerification(string userId, string contentLanguage, byte[] video, bool doBlinkDetection)
+        public string VideoVerification(string userId, string contentLanguage, string videoPath)
+        {
+            return VideoVerification(userId, contentLanguage, File.ReadAllBytes(videoPath), false);
+        }
+
+        public string VideoVerification(string userId, string contentLanguage, byte[] video)
+        {
+            return VideoVerification(userId, contentLanguage, video, false);
+        }
+
+        public string VideoVerification(string userId, string contentLanguage, byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -410,10 +434,10 @@ namespace VoiceIt2API
             request.AddFileBytes("video", video, "video");
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VideoVerificationByUrl(string userId, string contentLanguage, string fileUrl)
+        public string VideoVerificationByUrl(string userId, string contentLanguage, string fileUrl)
         {
             var request = new RestRequest
             {
@@ -425,10 +449,10 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VideoVerificationByUrl(string userId, string contentLanguage, string fileUrl, bool doBlinkDetection)
+        public string VideoVerificationByUrl(string userId, string contentLanguage, string fileUrl, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -441,10 +465,15 @@ namespace VoiceIt2API
             request.AddParameter("doBlinkDetection", doBlinkDetection);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VoiceIdentification(string groupId, byte[] recording, string contentLanguage)
+        public string VoiceIdentification(string groupId, string recordingPath, string contentLanguage)
+        {
+            return VoiceIdentification(groupId, File.ReadAllBytes(recordingPath), contentLanguage);
+        }
+
+        public string VoiceIdentification(string groupId, byte[] recording, string contentLanguage)
         {
             var request = new RestRequest
             {
@@ -456,10 +485,10 @@ namespace VoiceIt2API
             request.AddFileBytes("recording", recording, "recording");
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VoiceIdentificationByUrl(string groupId, string fileUrl, string contentLanguage)
+        public string VoiceIdentificationByUrl(string groupId, string fileUrl, string contentLanguage)
         {
             var request = new RestRequest
             {
@@ -471,25 +500,25 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VideoIdentification(string groupId, byte[] video, string contentLanguage)
+        public string VideoIdentification(string groupId, string videoPath, string contentLanguage, bool doBlinkDetection)
         {
-            var request = new RestRequest
-            {
-                Resource = "/identification/video",
-                Method = RestSharp.Method.POST
-            };
-            request.AddParameter("groupId", groupId);
-            request.AddParameter("contentLanguage", contentLanguage);
-            request.AddFileBytes("video", video, "video");
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return VideoIdentification(groupId, File.ReadAllBytes(videoPath), contentLanguage, doBlinkDetection);
         }
 
-        public Task<string> VideoIdentification(string groupId, byte[] video, string contentLanguage, bool doBlinkDetection)
+        public string VideoIdentification(string groupId, string videoPath, string contentLanguage)
+        {
+            return VideoIdentification(groupId, File.ReadAllBytes(videoPath), contentLanguage, false);
+        }
+
+        public string VideoIdentification(string groupId, byte[] video, string contentLanguage)
+        {
+            return VideoIdentification(groupId, video, contentLanguage, false);
+        }
+
+        public string VideoIdentification(string groupId, byte[] video, string contentLanguage, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -502,10 +531,10 @@ namespace VoiceIt2API
             request.AddParameter("doBlinkDetection", doBlinkDetection);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VideoIdentificationByUrl(string groupId, string fileUrl, string contentLanguage)
+        public string VideoIdentificationByUrl(string groupId, string fileUrl, string contentLanguage)
         {
             var request = new RestRequest
             {
@@ -517,10 +546,10 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public Task<string> VideoIdentificationByUrl(string groupId, string fileUrl, string contentLanguage, bool doBlinkDetection)
+        public string VideoIdentificationByUrl(string groupId, string fileUrl, string contentLanguage, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -533,7 +562,7 @@ namespace VoiceIt2API
             request.AddParameter("doBlinkDetection", doBlinkDetection);
 
             IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
     }
 }
