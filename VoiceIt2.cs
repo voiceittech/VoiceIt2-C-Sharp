@@ -16,7 +16,7 @@ namespace VoiceIt2API
             client = new RestClient();
             client.BaseUrl = new Uri(BASE_URL);
             client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
-
+            client.AddDefaultHeader("platformId", "30");
         }
 
         public string GetAllUsers()
