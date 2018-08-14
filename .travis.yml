@@ -18,7 +18,6 @@ before_script:
 -  wget -O ~/faceEnrollmentArmaan2.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan2.mp4
 -  wget -O ~/faceEnrollmentArmaan3.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan3.mp4
 -  wget -O ~/faceVerificationArmaan1.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceVerificationArmaan1.mp4
--  which awk
 script:
 -  cd ~/ && git clone https://github.com/voiceittech/VoiceIt2-C-Sharp-Test.git && cp ~/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ~/VoiceIt2-C-Sharp-Test/testcsharp/VoiceIt2API.cs && cd VoiceIt2-C-Sharp-Test && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
 after_success:
