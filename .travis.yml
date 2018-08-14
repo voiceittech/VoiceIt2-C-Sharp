@@ -21,6 +21,8 @@ before_script:
 script:
 -  cd ~/ && git clone https://github.com/voiceittech/VoiceIt2-C-Sharp-Test.git && cp ~/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ~/VoiceIt2-C-Sharp-Test/testcsharp/VoiceIt2API.cs && cd VoiceIt2-C-Sharp-Test && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
 after_success:
+- sudo apt-get update
+- sudo apt-get install dotnet-sdk-2.1.4
 - cd /home/travis/VoiceIt2-C-Sharp-Test && ./upload.sh
 notifications:
   slack:
