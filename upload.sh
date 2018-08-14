@@ -1,11 +1,9 @@
 #!/bin/bash
-cd ~/
-version=$(nuget list voiceit | awk '{print $2}' | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}') 
-
-wget https://voiceit-files.s3.amazonaws.com/VoiceIt2.zip
 unzip VoiceIt2.zip
-cd VoiceIt2
+mv VoiceIt2 ~/
+cd ~/VoiceIt2
 
+version=$(nuget list voiceit | awk '{print $2}' | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}') 
 echo '<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
