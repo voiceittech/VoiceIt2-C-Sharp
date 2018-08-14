@@ -469,12 +469,12 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string VoiceIdentification(string groupId, string recordingPath, string contentLanguage)
+        public string VoiceIdentification(string groupId, string contentLanguage, string recordingPath)
         {
-            return VoiceIdentification(groupId, File.ReadAllBytes(recordingPath), contentLanguage);
+            return VoiceIdentification(groupId, contentLanguage, File.ReadAllBytes(recordingPath));
         }
 
-        public string VoiceIdentification(string groupId, byte[] recording, string contentLanguage)
+        public string VoiceIdentification(string groupId, string contentLanguage, byte[] recording)
         {
             var request = new RestRequest
             {
@@ -489,7 +489,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string VoiceIdentificationByUrl(string groupId, string fileUrl, string contentLanguage)
+        public string VoiceIdentificationByUrl(string groupId, string contentLanguage, string fileUrl)
         {
             var request = new RestRequest
             {
@@ -504,22 +504,22 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string VideoIdentification(string groupId, string videoPath, string contentLanguage, bool doBlinkDetection)
+        public string VideoIdentification(string groupId, string contentLanguage, string videoPath, bool doBlinkDetection)
         {
-            return VideoIdentification(groupId, File.ReadAllBytes(videoPath), contentLanguage, doBlinkDetection);
+            return VideoIdentification(groupId, contentLanguage, File.ReadAllBytes(videoPath), doBlinkDetection);
         }
 
-        public string VideoIdentification(string groupId, string videoPath, string contentLanguage)
+        public string VideoIdentification(string groupId, string contentLanguage, string videoPath)
         {
-            return VideoIdentification(groupId, File.ReadAllBytes(videoPath), contentLanguage, false);
+            return VideoIdentification(groupId, contentLanguage, File.ReadAllBytes(videoPath), false);
         }
 
-        public string VideoIdentification(string groupId, byte[] video, string contentLanguage)
+        public string VideoIdentification(string groupId, string contentLanguage, byte[] video)
         {
-            return VideoIdentification(groupId, video, contentLanguage, false);
+            return VideoIdentification(groupId, contentLanguage, video, false);
         }
 
-        public string VideoIdentification(string groupId, byte[] video, string contentLanguage, bool doBlinkDetection)
+        public string VideoIdentification(string groupId, string contentLanguage, byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -535,7 +535,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string VideoIdentificationByUrl(string groupId, string fileUrl, string contentLanguage)
+        public string VideoIdentificationByUrl(string groupId, string contentLanguage, string fileUrl)
         {
             var request = new RestRequest
             {
@@ -550,7 +550,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string VideoIdentificationByUrl(string groupId, string fileUrl, string contentLanguage, bool doBlinkDetection)
+        public string VideoIdentificationByUrl(string groupId, string contentLanguage, string fileUrl, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
