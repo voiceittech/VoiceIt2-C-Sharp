@@ -1,6 +1,6 @@
 <img src="./csharp.png" width="100%" style="width:100%" />
 
-# VoiceIt2-C\# ![travisstatus](https://travis-ci.org/voiceittech/VoiceIt2-C-Sharp.svg?branch=master)
+# VoiceIt2-C\# ![travis](https://travis-ci.org/voiceittech/VoiceIt2-C-Sharp.svg?branch=master)
 
 A C# wrapper for VoiceIt's API 2.0 featuring Voice + Face Verification and Identification.
 
