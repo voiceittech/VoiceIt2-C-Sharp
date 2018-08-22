@@ -19,14 +19,15 @@ before_script:
   - wget -O ~/faceEnrollmentArmaan3.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentArmaan3.mp4
   - wget -O ~/faceVerificationArmaan1.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceVerificationArmaan1.mp4
 script:
-  - cd ~/ && git clone https://github.com/voiceittech/VoiceIt2-C-Sharp-Test.git && cp ~/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ~/VoiceIt2-C-Sharp-Test/testcsharp/VoiceIt2API.cs && cd VoiceIt2-C-Sharp-Test && nuget restore && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
+  - cd Test && cp ../VoiceIt2.cs VoiceIt2API.cs && nuget restore && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
 after_success:
   - curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
   - sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
   - sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
   - sudo apt-get update
   - sudo apt-get install dotnet-sdk-2.1.4
-  - cd /home/travis/VoiceIt2-C-Sharp-Test && ./upload.sh
+  # - cd  && ./upload.sh
+  - pwd
 notifications:
   slack:
     secure: kQzeiUsaorfb5CQH2cYKh4TDJzKxVSRW0eKlI1W66HRnFG+vm2xtAOLwvS9nh0x5Ea3NQfyltNmQPeou+B/4E2uIdhM0xSuTjOFjRzF3qZ/FpC+P5Q643/hzmS1zbM6H8LeFwHbUIy4xsTCABj1+d4RGYjA+FwEdUcW/LS1lmMmHCHEtz0j/v9Irh9VpVn4mUKcYzMTEm7te+sG2IKwK45lQ3l2B9QKx8C+juUB1AQPV4eBJDYN/HnnbJRYzlCjEyBUsqBRhS3ujbWooU6xM+mqk0ixGmQhpgweGN9odp5QczsX3GjBywAn4Dl0v7sXLC4PmhLqJGY3N8GIrIZv4gqlZj54ZLzep90rfIpyX9yluTIvnSU81teraYGdBQmnQ1icQJn7B72tPC9/dxKbURkpnW8r/Lb6XQB1xl+tJmC+/5WAf/SRSe1gc9YCdXfnIJAserEdILjHrLaOCnKTVscdTnn+d3kRSshf4jq4R3SPlAmN/X693lqoRUH9vRHuLtHkO5G7hHkNP6xsxPvFug9lH7xX1hBJLa4A2tuBkwIavnxuw8L8vBJ2S6i0ZJUCYh9zRy9unFEDKsnn226dNYgZSv2D3xBP9Gl+59lpbfDt7Y7glN6zjSXlXKU5MK9DvpZVHcgynF7SqRnxvKy6c5igOupcVsMjd1Fd+nOyE30c=
