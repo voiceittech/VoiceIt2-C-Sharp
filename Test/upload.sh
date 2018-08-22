@@ -1,13 +1,34 @@
 #!/bin/bash
-
-#!/bin/bash
 commit=$(git log -1 --pretty=%B | head -n 1)
-if [[ $commit = *"Release"* ]];
+version=$(echo $(nuget list voiceit | awk '{print $2}') | tr "." "\n")
+set -- $version
+major=$1
+minor=$2
+patch=$3
+
+if [[ $commit = *"RELEASE"* ]];
 then
+  if [[ $commit = *"RELEASEMAJOR"* ]];
+  then
+    major=$(($major+1))
+    minor=0
+    patch=0
+  elif [[ $commit = *"RELEASEMINOR"* ]];
+  then
+    minor=$(($minor+1))
+    patch=0
+  elif [[ $commit = *"RELEASEPATCH"* ]];
+  then
+    patch=$(($patch+1))
+  else
+    echo "Must specify RELEASEMAJOR, RELEASEMINOR, or RELEASEPATCH in the title." 1>&2
+    exit 1
+  fi
+  version=$major'.'$minor'.'$patch
+
   unzip VoiceIt2.zip
   cd Voiceit2
 
-  version=$(nuget list voiceit | awk '{print $2}' | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}') 
   echo '<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
@@ -57,4 +78,5 @@ then
 
   nuget pack VoiceIt.$version.nuspec
   dotnet nuget push VoiceIt.$version.nupkg -k $NUGETTOKEN -s https://api.nuget.org/v3/index.json
+  
 fi
