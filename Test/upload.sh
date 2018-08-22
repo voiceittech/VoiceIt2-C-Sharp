@@ -1,12 +1,11 @@
 #!/bin/bash
 
 #!/bin/bash
-commit=$(cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp && git log -1 --pretty=%B | head -n 1)
+commit=$(git log -1 --pretty=%B | head -n 1)
 if [[ $commit = *"Release"* ]];
 then
   unzip VoiceIt2.zip
-  mv Voiceit2 ~/
-  cd ~/Voiceit2
+  cd Voiceit2
 
   version=$(nuget list voiceit | awk '{print $2}' | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}') 
   echo '<Project Sdk="Microsoft.NET.Sdk">
