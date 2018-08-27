@@ -502,19 +502,19 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             // Create Face Enrollments
-            x = myVoiceIt.CreateFaceEnrollment(userId1, "/home/travis/videoEnrollmentStephen1.mov");
+            x = myVoiceIt.CreateFaceEnrollment(userId2, "/home/travis/videoEnrollmentStephen1.mov");
             (status, responseCode) = Deserialize(x);
             int faceEnrollment2Id1 = GetFaceEnrollmentId(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateFaceEnrollment(userId1, "/home/travis/videoEnrollmentStephen2.mov");
+            x = myVoiceIt.CreateFaceEnrollment(userId2, "/home/travis/videoEnrollmentStephen2.mov");
             (status, responseCode) = Deserialize(x);
             int faceEnrollment2Id2 = GetFaceEnrollmentId(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateFaceEnrollment(userId1, "/home/travis/videoEnrollmentStephen3.mov");
+            x = myVoiceIt.CreateFaceEnrollment(userId2, "/home/travis/videoEnrollmentStephen3.mov");
             (status, responseCode) = Deserialize(x);
             int faceEnrollment2Id3 = GetFaceEnrollmentId(x);
             AssertEqual(status, 201);
