@@ -130,7 +130,7 @@ namespace testcsharpwrapper
             // Get All Groups
             x = myVoiceIt.GetAllGroups();
             (status, responseCode) = Deserialize(x);
-            AssertEqual(status, 201);
+            AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
             // Add User to Group
