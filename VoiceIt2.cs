@@ -588,12 +588,12 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string FaceIdentification(string groupId, string recordingPath)
+        public string FaceIdentification(string groupId, string videoPath)
         {
-            return FaceIdentification(groupId, File.ReadAllBytes(recordingPath), false);
+            return FaceIdentification(groupId, File.ReadAllBytes(videoPath), false);
         }
 
-        public string FaceIdentification(string groupId, byte[] recording, bool doBlinkDetection)
+        public string FaceIdentification(string groupId, byte[] video, bool doBlinkDetection)
         {
             var request = new RestRequest
             {
@@ -602,15 +602,15 @@ namespace VoiceIt2API
             };
             request.AddParameter("groupId", groupId);
             request.AddParameter("doBlinkDetection", doBlinkDetection);
-            request.AddFileBytes("recording", recording, "recording");
+            request.AddFileBytes("video", video, "video");
 
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string FaceIdentificationByUrl(string groupId, string recordingPath)
+        public string FaceIdentificationByUrl(string groupId, string fileUrl)
         {
-            return FaceIdentification(groupId, File.ReadAllBytes(recordingPath), false);
+            return FaceIdentificationByUrl(groupId, fileUrl, false);
         }
 
         public string FaceIdentificationByUrl(string groupId, string fileUrl, bool doBlinkDetection)
