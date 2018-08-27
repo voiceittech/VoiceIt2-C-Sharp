@@ -528,6 +528,7 @@ namespace testcsharpwrapper
 
             // Face Identification
             x = myVoiceIt.FaceIdentification(groupId, "/home/travis/faceVerificationArmaan1.mp4");
+            Console.WriteLine(x);
             (status, responseCode) = Deserialize(x);
             userId = GetUserId(x);
             AssertEqual(status, 200);
@@ -536,6 +537,7 @@ namespace testcsharpwrapper
 
             // Face Identification By URL
             x = myVoiceIt.FaceIdentificationByUrl(groupId, "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceVerificationArmaan1.mp4");
+            Console.WriteLine(x);
             (status, responseCode) = Deserialize(x);
             userId = GetUserId(x);
             AssertEqual(status, 200);
