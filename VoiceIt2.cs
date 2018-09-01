@@ -19,6 +19,17 @@ namespace VoiceIt2API
             client.AddDefaultHeader("platformId", "30");
         }
 
+        public string GetPhrases(String contentLanguage)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/phrases/" + contentLanguage,
+                Method = RestSharp.Method.GET
+            };
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
         public string GetAllUsers()
         {
             var request = new RestRequest
@@ -74,44 +85,85 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string GetPhrases(String contentLanguage)
+        public string GetAllGroups()
         {
             var request = new RestRequest
             {
-                Resource = "/phrases/" + contentLanguage,
+                Resource = "/groups",
                 Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string DeleteAllVoiceEnrollments(string userId)
+        public string GetGroup(string groupId)
         {
             var request = new RestRequest
             {
-                Resource = "/enrollments/" + userId + "/voice",
-                Method = RestSharp.Method.DELETE
+                Resource = "/groups/" + groupId,
+                Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string DeleteAllFaceEnrollments(string userId)
+        public string GroupExists(string groupId)
         {
             var request = new RestRequest
             {
-                Resource = "/enrollments/" + userId + "/face",
-                Method = RestSharp.Method.DELETE
+                Resource = "/groups/" + groupId + "/exists",
+                Method = RestSharp.Method.GET
             };
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string DeleteAllVideoEnrollments(string userId)
+        public string CreateGroup(string description)
         {
             var request = new RestRequest
             {
-                Resource = "/enrollments/" + userId + "/video",
+                Resource = "/groups",
+                Method = RestSharp.Method.POST
+            };
+            request.AddParameter("description", description);
+
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string AddUserToGroup(string groupId, string userId)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/groups/addUser",
+                Method = RestSharp.Method.PUT
+            };
+            request.AddParameter("groupId", groupId);
+            request.AddParameter("userId", userId);
+
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string RemoveUserFromGroup(string groupId, string userId)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/groups/removeUser",
+                Method = RestSharp.Method.PUT
+            };
+            request.AddParameter("groupId", groupId);
+            request.AddParameter("userId", userId);
+
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string DeleteGroup(string groupId)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/groups/" + groupId,
                 Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
@@ -325,85 +377,44 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string GetAllGroups()
+        public string DeleteAllVoiceEnrollments(string userId)
         {
             var request = new RestRequest
             {
-                Resource = "/groups",
-                Method = RestSharp.Method.GET
+                Resource = "/enrollments/" + userId + "/voice",
+                Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string GetGroup(string groupId)
+        public string DeleteAllFaceEnrollments(string userId)
         {
             var request = new RestRequest
             {
-                Resource = "/groups/" + groupId,
-                Method = RestSharp.Method.GET
+                Resource = "/enrollments/" + userId + "/face",
+                Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string GroupExists(string groupId)
+        public string DeleteAllVideoEnrollments(string userId)
         {
             var request = new RestRequest
             {
-                Resource = "/groups/" + groupId + "/exists",
-                Method = RestSharp.Method.GET
+                Resource = "/enrollments/" + userId + "/video",
+                Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string CreateGroup(string description)
+        public string DeleteAllEnrollments(string userId)
         {
             var request = new RestRequest
             {
-                Resource = "/groups",
-                Method = RestSharp.Method.POST
-            };
-            request.AddParameter("description", description);
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string AddUserToGroup(string groupId, string userId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/groups/addUser",
-                Method = RestSharp.Method.PUT
-            };
-            request.AddParameter("groupId", groupId);
-            request.AddParameter("userId", userId);
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string RemoveUserFromGroup(string groupId, string userId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/groups/removeUser",
-                Method = RestSharp.Method.PUT
-            };
-            request.AddParameter("groupId", groupId);
-            request.AddParameter("userId", userId);
-
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteGroup(string groupId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/groups/" + groupId,
+                Resource = "/enrollments/" + userId + "/all",
                 Method = RestSharp.Method.DELETE
             };
             IRestResponse response = client.Execute(request);

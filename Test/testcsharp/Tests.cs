@@ -90,9 +90,6 @@ namespace testcsharpwrapper
             return Int32.Parse(dobj["faceEnrollmentId"].ToString());
         }
 
-
-
-
         public static void Main(string[] args)
         {
             /**
@@ -566,6 +563,18 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             Console.WriteLine("****Test Face All Succeeded****");
+
+            /**
+             ****Test Delete All ****
+            **/
+
+            x = myVoiceIt.DeleteAllEnrollments(userId);
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 200);
+            AssertEqual(responseCode, "SUCC");
+
+            Console.WriteLine("****Test Delete All Succeeded****");
+
             myVoiceIt.DeleteUser(userId1);
             myVoiceIt.DeleteUser(userId2);
 
