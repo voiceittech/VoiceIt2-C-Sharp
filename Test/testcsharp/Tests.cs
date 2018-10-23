@@ -229,7 +229,7 @@ namespace testcsharpwrapper
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateVideoEnrollment(userId2, "en-US", "never forget tomorrow is a new day", File.ReadAllBytes("/home/travis/videoEnrollmentStephen3.mov"), false);
+            x = myVoiceIt.CreateVideoEnrollment(userId2, "en-US", "never forget tomorrow is a new day", File.ReadAllBytes("/home/travis/videoEnrollmentStephen3.mov"));
             (status, responseCode) = Deserialize(x);
             int enrollmentId6 = GetEnrollmentId(x);
             AssertEqual(status, 201);
@@ -242,7 +242,7 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             // Video Verification
-            x = myVoiceIt.VideoVerification(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/videoVerificationArmaan1.mov", false);
+            x = myVoiceIt.VideoVerification(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/videoVerificationArmaan1.mov");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
@@ -301,7 +301,7 @@ namespace testcsharpwrapper
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateVideoEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentArmaan3.mov", false);
+            x = myVoiceIt.CreateVideoEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentArmaan3.mov");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
