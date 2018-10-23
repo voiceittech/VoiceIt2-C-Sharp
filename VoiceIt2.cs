@@ -531,6 +531,10 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
+        public string FaceIdentification(string groupId, string videoPath)
+            return FaceIdentification(groupId, File.ReadAllBytes(videoPath));
+        }
+
         public string FaceIdentification(string groupId, byte[] video)
         {
             var request = new RestRequest
