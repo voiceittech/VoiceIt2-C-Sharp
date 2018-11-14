@@ -7,10 +7,10 @@ before_script:
   - wget -O ~/videoEnrollmentStephen1.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentStephen1.mov
   - wget -O ~/videoEnrollmentStephen2.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentStephen2.mov
   - wget -O ~/videoEnrollmentStephen3.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentStephen3.mov
-  - wget -O ~/enrollmentArmaan1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan1.wav
-  - wget -O ~/enrollmentArmaan2.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan2.wav
-  - wget -O ~/enrollmentArmaan3.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan3.wav
-  - wget -O ~/verificationArmaan1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationArmaan1.wav
+  - wget -O ~/enrollmentNoel1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentNoel1.wav
+  - wget -O ~/enrollmentNoel2.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentNoel2.wav
+  - wget -O ~/enrollmentNoel3.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentNoel3.wav
+  - wget -O ~/verificationNoel1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationNoel1.wav
   - wget -O ~/enrollmentStephen1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentStephen1.wav
   - wget -O ~/enrollmentStephen2.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentStephen2.wav
   - wget -O ~/enrollmentStephen3.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentStephen3.wav

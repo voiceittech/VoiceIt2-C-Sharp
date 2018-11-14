@@ -166,6 +166,12 @@ namespace testcsharpwrapper
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
+            // Create User Token
+            x = myVoiceIt.CreateUserToken(userId);
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 201);
+            AssertEqual(responseCode, "SUCC");
+
             // Delete Group
             x = myVoiceIt.DeleteGroup(groupId);
             (status, responseCode) = Deserialize(x);
@@ -356,17 +362,17 @@ namespace testcsharpwrapper
             myVoiceIt.AddUserToGroup(groupId, userId2);
 
             // Voice Enrollments
-            x = myVoiceIt.CreateVoiceEnrollment(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/enrollmentArmaan1.wav");
+            x = myVoiceIt.CreateVoiceEnrollment(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/enrollmentNoel1.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateVoiceEnrollment(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/enrollmentArmaan2.wav");
+            x = myVoiceIt.CreateVoiceEnrollment(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/enrollmentNoel2.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateVoiceEnrollment(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/enrollmentArmaan3.wav");
+            x = myVoiceIt.CreateVoiceEnrollment(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/enrollmentNoel3.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
@@ -387,13 +393,13 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             // Voice Verification
-            x = myVoiceIt.VoiceVerification(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/verificationArmaan1.wav");
+            x = myVoiceIt.VoiceVerification(userId1, "en-US", "never forget tomorrow is a new day", "/home/travis/verificationNoel1.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
             // Voice Identification
-            x = myVoiceIt.VoiceIdentification(groupId, "en-US", "never forget tomorrow is a new day", "/home/travis/verificationArmaan1.wav");
+            x = myVoiceIt.VoiceIdentification(groupId, "en-US", "never forget tomorrow is a new day", "/home/travis/verificationNoel1.wav");
             (status, responseCode) = Deserialize(x);
             userId = GetUserId(x);
             AssertEqual(status, 200);
@@ -414,17 +420,17 @@ namespace testcsharpwrapper
             myVoiceIt.AddUserToGroup(groupId, userId2);
 
             // Create Voice Enrollments by URL
-            x = myVoiceIt.CreateVoiceEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan1.wav");
+            x = myVoiceIt.CreateVoiceEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentNoel1.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateVoiceEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan2.wav");
+            x = myVoiceIt.CreateVoiceEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentNoel2.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
-            x = myVoiceIt.CreateVoiceEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentArmaan3.wav");
+            x = myVoiceIt.CreateVoiceEnrollmentByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentNoel3.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
@@ -446,13 +452,13 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             // Voice Verification By URL
-            x = myVoiceIt.VoiceVerificationByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationArmaan1.wav");
+            x = myVoiceIt.VoiceVerificationByUrl(userId1, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationNoel1.wav");
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
             // Voice Identification By URL
-            x = myVoiceIt.VoiceIdentificationByUrl(groupId, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationArmaan1.wav");
+            x = myVoiceIt.VoiceIdentificationByUrl(groupId, "en-US", "never forget tomorrow is a new day", "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationNoel1.wav");
             (status, responseCode) = Deserialize(x);
             userId = GetUserId(x);
             AssertEqual(status, 200);

@@ -599,5 +599,17 @@ namespace VoiceIt2API
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
+
+        public string CreateUserToken(string userId)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/users/" + userId + "/token",
+                Method = RestSharp.Method.POST
+            };
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
     }
 }
