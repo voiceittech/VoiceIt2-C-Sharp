@@ -99,9 +99,14 @@ namespace testcsharpwrapper
             string viapikey = Environment.GetEnvironmentVariable("VIAPIKEY");
             string viapitoken = Environment.GetEnvironmentVariable("VIAPITOKEN");
             VoiceIt2 myVoiceIt = new VoiceIt2(viapikey, viapitoken);
-            myVoiceIt.AddNotificationUrl("https://f317f121.ngrok.io");
             string x = "";
 
+
+            // Webhook Notifications
+            myVoiceIt.AddNotificationUrl("https://voiceit.io");
+            AssertEqual(myVoiceIt.notificationUrl, "?notificationURL=https%3A%2F%2Fvoiceit.io");
+            myVoiceIt.RemoveNotificationUrl();
+            AssertEqual(myVoiceIt.notificationUrl, "");
 
             // Create User
             x = myVoiceIt.CreateUser();
