@@ -30,6 +30,11 @@ namespace VoiceIt2API
           notificationUrl = "";
         }
 
+        public string AddNotificationUrl(String url)
+        {
+          return notificationUrl;
+        }
+
         public string GetPhrases(String contentLanguage)
         {
             var request = new RestRequest
