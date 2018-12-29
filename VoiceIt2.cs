@@ -30,7 +30,7 @@ namespace VoiceIt2API
           notificationUrl = "";
         }
 
-        public string AddNotificationUrl(String url)
+        public string GetNotificationUrl()
         {
           return notificationUrl;
         }
