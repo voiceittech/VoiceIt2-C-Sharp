@@ -9,6 +9,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
+        string notificationUrl = "";
         RestClient client;
 
         public VoiceIt2(string apiKey, string apiToken)
@@ -19,6 +20,16 @@ namespace VoiceIt2API
             client.AddDefaultHeader("platformId", "30");
         }
 
+        public void AddNotificationUrl(String url)
+        {
+          notificationUrl = url;
+        }
+
+        public void RemoveNotificationUrl(String url)
+        {
+          notificationUrl = "";
+        }
+
         public string GetPhrases(String contentLanguage)
         {
             var request = new RestRequest
@@ -26,6 +37,9 @@ namespace VoiceIt2API
                 Resource = "/phrases/" + contentLanguage,
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -37,6 +51,9 @@ namespace VoiceIt2API
                 Resource = "/users",
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -48,6 +65,9 @@ namespace VoiceIt2API
                 Resource = "/users",
                 Method = RestSharp.Method.POST
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -59,6 +79,9 @@ namespace VoiceIt2API
                 Resource = "/users/" + userId,
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -70,6 +93,9 @@ namespace VoiceIt2API
                 Resource = "/users/" + userId,
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -81,6 +107,9 @@ namespace VoiceIt2API
                 Resource = "/users/" + userId + "/groups",
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -92,6 +121,9 @@ namespace VoiceIt2API
                 Resource = "/groups",
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -103,6 +135,9 @@ namespace VoiceIt2API
                 Resource = "/groups/" + groupId,
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -114,6 +149,9 @@ namespace VoiceIt2API
                 Resource = "/groups/" + groupId + "/exists",
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -127,6 +165,9 @@ namespace VoiceIt2API
             };
             request.AddParameter("description", description);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -141,6 +182,9 @@ namespace VoiceIt2API
             request.AddParameter("groupId", groupId);
             request.AddParameter("userId", userId);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -155,6 +199,9 @@ namespace VoiceIt2API
             request.AddParameter("groupId", groupId);
             request.AddParameter("userId", userId);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -166,6 +213,9 @@ namespace VoiceIt2API
                 Resource = "/groups/" + groupId,
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -177,6 +227,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/voice/" + userId,
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -188,6 +241,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/face/" + userId,
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -199,6 +255,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/video/" + userId,
                 Method = RestSharp.Method.GET
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -220,6 +279,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddFileBytes("recording", recording, "recording");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -236,6 +298,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -255,6 +320,9 @@ namespace VoiceIt2API
             request.AddParameter("userId", userId);
             request.AddFileBytes("video", video, "video");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -269,6 +337,9 @@ namespace VoiceIt2API
             request.AddParameter("userId", userId);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -290,6 +361,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddFileBytes("video", video, "video");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -306,6 +380,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -317,6 +394,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/voice/" + userId + "/" + enrollmentId.ToString(),
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -328,6 +408,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/face/" + userId + "/" + faceEnrollmentId.ToString(),
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -339,6 +422,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/video/" + userId + "/" + enrollmentId.ToString(),
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -350,6 +436,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/" + userId + "/voice",
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -361,6 +450,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/" + userId + "/face",
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -372,6 +464,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/" + userId + "/video",
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -383,6 +478,9 @@ namespace VoiceIt2API
                 Resource = "/enrollments/" + userId + "/all",
                 Method = RestSharp.Method.DELETE
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -404,6 +502,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddFileBytes("recording", recording, "recording");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -420,6 +521,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -439,6 +543,9 @@ namespace VoiceIt2API
             request.AddParameter("userId", userId);
             request.AddFileBytes("video", video, "video");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -453,6 +560,9 @@ namespace VoiceIt2API
             request.AddParameter("userId", userId);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -474,6 +584,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddFileBytes("video", video, "video");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -490,6 +603,9 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
             request.AddParameter("phrase", phrase);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -511,6 +627,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddFileBytes("recording", recording, "recording");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -527,6 +646,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -545,6 +667,9 @@ namespace VoiceIt2API
             request.AddParameter("groupId", groupId);
             request.AddFileBytes("video", video, "video");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -559,6 +684,9 @@ namespace VoiceIt2API
             request.AddParameter("groupId", groupId);
             request.AddParameter("fileUrl", fileUrl);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -580,6 +708,9 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddFileBytes("video", video, "video");
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -596,6 +727,9 @@ namespace VoiceIt2API
             request.AddParameter("fileUrl", fileUrl);
             request.AddParameter("phrase", phrase);
 
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
@@ -607,6 +741,9 @@ namespace VoiceIt2API
                 Resource = "/users/" + userId + "/token",
                 Method = RestSharp.Method.POST
             };
+            if (notificationUrl != "") {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
