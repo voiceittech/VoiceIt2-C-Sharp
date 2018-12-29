@@ -101,7 +101,6 @@ namespace testcsharpwrapper
             VoiceIt2 myVoiceIt = new VoiceIt2(viapikey, viapitoken);
             string x = "";
 
-
             // Webhook Notifications
             myVoiceIt.AddNotificationUrl("https://voiceit.io");
             AssertEqual(myVoiceIt.GetNotificationUrl(), "https://voiceit.io");

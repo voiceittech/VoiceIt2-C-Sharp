@@ -25,7 +25,7 @@ namespace VoiceIt2API
           notificationUrl = url;
         }
 
-        public void RemoveNotificationUrl(String url)
+        public void RemoveNotificationUrl()
         {
           notificationUrl = "";
         }
