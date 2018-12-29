@@ -104,7 +104,7 @@ namespace testcsharpwrapper
 
             // Webhook Notifications
             myVoiceIt.AddNotificationUrl("https://voiceit.io");
-            AssertEqual(myVoiceIt.notificationUrl, "?notificationURL=https%3A%2F%2Fvoiceit.io");
+            AssertEqual(myVoiceIt.notificationUrl, "https://voiceit.io");
             myVoiceIt.RemoveNotificationUrl();
             AssertEqual(myVoiceIt.notificationUrl, "");
 
