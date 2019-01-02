@@ -739,7 +739,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string CreateUserToken(string userId)
+        public string CreateUserToken(string userId, int timeOut)
         {
             var request = new RestRequest
             {
@@ -749,6 +749,7 @@ namespace VoiceIt2API
             if (notificationUrl != "") {
               request.AddParameter("notificationURL", notificationUrl);
             }
+            request.AddParameter("timeOut", timeOut.ToString());
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }

@@ -172,7 +172,7 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             // Create User Token
-            x = myVoiceIt.CreateUserToken(userId);
+            x = myVoiceIt.CreateUserToken(userId, 5);
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
