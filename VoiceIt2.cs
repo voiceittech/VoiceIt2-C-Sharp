@@ -9,6 +9,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
+        const string VERSION = "2.2.0";
         string notificationUrl = "";
         RestClient client;
 
@@ -18,6 +19,7 @@ namespace VoiceIt2API
             client.BaseUrl = new Uri(BASE_URL);
             client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
             client.AddDefaultHeader("platformId", "30");
+            client.AddDefaultHeader("platformVersion", VERSION);
         }
 
         public void AddNotificationUrl(String url)
@@ -33,6 +35,11 @@ namespace VoiceIt2API
         public string GetNotificationUrl()
         {
           return notificationUrl;
+        }
+
+        public string GetVersion()
+        {
+          return VERSION;
         }
 
         public string GetPhrases(String contentLanguage)
@@ -746,9 +753,6 @@ namespace VoiceIt2API
                 Resource = "/users/" + userId + "/token",
                 Method = RestSharp.Method.POST
             };
-            if (notificationUrl != "") {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
             request.AddParameter("timeOut", timeOut.ToString());
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();

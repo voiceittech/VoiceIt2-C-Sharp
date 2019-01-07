@@ -92,6 +92,8 @@ namespace testcsharpwrapper
 
         public static void Main(string[] args)
         {
+
+
             /**
              ****Test Basics****
             **/
@@ -99,6 +101,7 @@ namespace testcsharpwrapper
             string viapikey = Environment.GetEnvironmentVariable("VIAPIKEY");
             string viapitoken = Environment.GetEnvironmentVariable("VIAPITOKEN");
             VoiceIt2 myVoiceIt = new VoiceIt2(viapikey, viapitoken);
+            System.IO.File.WriteAllText(Environment.GetEnvironmentVariable("HOME") + "/platformVersion", myVoiceIt.GetVersion());
             string x = "";
 
             // Webhook Notifications

@@ -5,78 +5,146 @@ set -- $version
 major=$1
 minor=$2
 patch=$3
+wrapperplatformversion=$(cat ~/platformVersion)
+reponame=$(basename $(git remote get-url origin) | sed 's/.\{4\}$//')
 
 if [[ $commit = *"RELEASE"* ]];
 then
+
+  if [[ $major = "" ]] || [[ $minor = "" ]] || [[ $patch = "" ]];
+  then
+    curl -X POST -H 'Content-type: application/json' --data '{
+      "icon_url": "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/TravisCI-Mascot-1.png",
+      "username": "Release Wrapper Gate",
+        "attachments": [
+            {
+                "text": "Packaging '$reponame' version '$version' failed. because script could not get current version",
+                "color": "danger"
+            }
+        ]
+    }' 'https://hooks.slack.com/services/'$SLACKPARAM1'/'$SLACKPARAM2'/'$SLACKPARAM3
+    echo "Unable to get current version: cannot release." 1>&2
+    exit 1
+  fi
+
+  echo 'old version='$major'.'$minor'.'$patch
   if [[ $commit = *"RELEASEMAJOR"* ]];
   then
+    releasetype="RELEASEMAJOR"
     major=$(($major+1))
     minor=0
     patch=0
   elif [[ $commit = *"RELEASEMINOR"* ]];
   then
+    releasetype="RELEASEMINOR"
     minor=$(($minor+1))
     patch=0
   elif [[ $commit = *"RELEASEPATCH"* ]];
   then
+    releasetype="RELEASEPATCH"
     patch=$(($patch+1))
   else
     echo "Must specify RELEASEMAJOR, RELEASEMINOR, or RELEASEPATCH in the title." 1>&2
     exit 1
   fi
+  echo 'new version='$major'.'$minor'.'$patch
   version=$major'.'$minor'.'$patch
 
-  unzip VoiceIt2.zip
-  cd Voiceit2
+  if [[ $wrapperplatformversion = $version ]];
+  then
 
-  echo '<Project Sdk="Microsoft.NET.Sdk">
+    unzip VoiceIt2.zip
+    cd Voiceit2
 
-    <PropertyGroup>
-      <TargetFramework>netstandard2.0</TargetFramework>
-      <PackageId>VoiceIt</PackageId>
-      <Version>'$version'</Version>
-      <Authors>Stephen Akers</Authors>
-      <Company>VoiceIt</Company>
-      <Title>VoiceIt</Title>
-    </PropertyGroup>
+    echo '<Project Sdk="Microsoft.NET.Sdk">
 
-    <ItemGroup>
-      <PackageReference Include="RestSharp" Version="106.3.1" />
-    </ItemGroup>
+      <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>VoiceIt</PackageId>
+        <Version>'$version'</Version>
+        <Authors>Stephen Akers</Authors>
+        <Company>VoiceIt</Company>
+        <Title>VoiceIt</Title>
+      </PropertyGroup>
 
-  </Project>' > VoiceIt.csproj
+      <ItemGroup>
+        <PackageReference Include="RestSharp" Version="106.3.1" />
+      </ItemGroup>
 
-  cp /home/travis/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ./VoiceIt.cs
+    </Project>' > VoiceIt.csproj
 
-  nuget restore
-  msbuild
+    cp /home/travis/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ./VoiceIt.cs
 
-  cd obj/Debug
-  here=$(pwd)
+    nuget restore
+    msbuild
 
-  echo '<?xml version="1.0" encoding="utf-8"?>
-  <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
-    <metadata>
-      <id>VoiceIt</id>
-      <version>'$version'</version>
-      <title>VoiceIt</title>
-      <authors>Stephen Akers</authors>
-      <owners>Stephen Akers</owners>
-      <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <description>Package Description</description>
-      <iconUrl>https://raw.githubusercontent.com/voiceittech/VoiceIt2-C-Sharp/master/voiceitlogo64.png</iconUrl>
-      <dependencies>
-        <group targetFramework=".NETStandard2.0">
-          <dependency id="RestSharp" version="106.2.2" exclude="Build,Analyzers" />
-        </group>
-      </dependencies>
-    </metadata>
-    <files>
-      <file src="'$here'/netstandard2.0/VoiceIt.dll" target="lib/netstandard2.0/VoiceIt.dll" />
-    </files>
-  </package>' > VoiceIt.$version.nuspec
+    cd obj/Debug
+    here=$(pwd)
 
-  nuget pack VoiceIt.$version.nuspec
-  dotnet nuget push VoiceIt.$version.nupkg -k $NUGETTOKEN -s https://api.nuget.org/v3/index.json
-  
+    echo '<?xml version="1.0" encoding="utf-8"?>
+    <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+      <metadata>
+        <id>VoiceIt</id>
+        <version>'$version'</version>
+        <title>VoiceIt</title>
+        <authors>Stephen Akers</authors>
+        <owners>Stephen Akers</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Package Description</description>
+        <iconUrl>https://raw.githubusercontent.com/voiceittech/VoiceIt2-C-Sharp/master/voiceitlogo64.png</iconUrl>
+        <dependencies>
+          <group targetFramework=".NETStandard2.0">
+            <dependency id="RestSharp" version="106.2.2" exclude="Build,Analyzers" />
+          </group>
+        </dependencies>
+      </metadata>
+      <files>
+        <file src="'$here'/netstandard2.0/VoiceIt.dll" target="lib/netstandard2.0/VoiceIt.dll" />
+      </files>
+    </package>' > VoiceIt.$version.nuspec
+
+    nuget pack VoiceIt.$version.nuspec
+    dotnet nuget push VoiceIt.$version.nupkg -k $NUGETTOKEN -s https://api.nuget.org/v3/index.json 1>&2
+
+    if [ "$?" != "0" ]
+    then
+      curl -X POST -H 'Content-type: application/json' --data '{
+        "icon_url": "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/TravisCI-Mascot-1.png",
+        "username": "Release Wrapper Gate",
+          "attachments": [
+              {
+                  "text": "Packaging '$reponame' version '$version' failed.",
+                  "color": "danger"
+              }
+          ]
+      }' 'https://hooks.slack.com/services/'$SLACKPARAM1'/'$SLACKPARAM2'/'$SLACKPARAM3
+      exit 1
+    fi
+
+    curl -X POST -H 'Content-type: application/json' --data '{
+      "icon_url": "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/TravisCI-Mascot-1.png",
+      "username": "Release Wrapper Gate",
+        "attachments": [
+            {
+                "text": "Packaging '$reponame' version '$version' succeeded.",
+                "color": "good"
+            }
+        ]
+    }' 'https://hooks.slack.com/services/'$SLACKPARAM1'/'$SLACKPARAM2'/'$SLACKPARAM3
+    exit 0
+
+  else
+    curl -X POST -H 'Content-type: application/json' --data '{
+      "icon_url": "https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/TravisCI-Mascot-1.png",
+      "username": "Release Wrapper Gate",
+        "attachments": [
+            {
+                "text": "Packaging '$reponame' version '$version' failed because the specified release version to update package management (specified by including '$releasetype' in the commit title) does not match the platform version inside the wrapper.",
+                "color": "danger"
+            }
+        ]
+    }' 'https://hooks.slack.com/services/'$SLACKPARAM1'/'$SLACKPARAM2'/'$SLACKPARAM3
+    echo "Specified release version to update package management (specified by including "$releasetype" in the commit title) does not match the platform version in wrapper source." 1>&2
+    exit 1
+  fi
 fi
