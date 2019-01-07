@@ -26,7 +26,7 @@ after_success:
   - sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
   - sudo apt-get update
   - sudo apt-get install dotnet-sdk-2.1.4
-  - cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp/Test && ./upload.sh
+  - cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp/Test && ./release.sh
   - cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp/Test && ./email.sh
 notifications:
   slack:
