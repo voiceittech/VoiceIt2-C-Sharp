@@ -794,7 +794,7 @@ namespace VoiceIt2API
                 Resource = "/users/" + userId + "/token",
                 Method = RestSharp.Method.POST
             };
-            request.AddParameter("timeOut", timeOut.ToString());
+            request.AddParameter("timeOut", secondsToTimeout.ToString());
             IRestResponse response = client.Execute(request);
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
