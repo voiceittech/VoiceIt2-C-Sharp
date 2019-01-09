@@ -787,7 +787,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string CreateUserToken(string userId, int timeOut)
+        public string CreateUserToken(string userId, int secondsToTimeout)
         {
             var request = new RestRequest
             {
