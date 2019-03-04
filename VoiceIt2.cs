@@ -799,5 +799,16 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
+        public string ExpireUserTokens(string userId)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/users/" + userId + "/expireTokens",
+                Method = RestSharp.Method.POST
+            };
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
     }
 }
