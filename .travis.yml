@@ -27,7 +27,6 @@ after_success:
   - sudo apt-get update
   - sudo apt-get install dotnet-sdk-2.1.4
   - cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp/Test && ./release.sh
-  - cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp/Test && ./email.sh
 notifications:
   slack:
     secure: kQzeiUsaorfb5CQH2cYKh4TDJzKxVSRW0eKlI1W66HRnFG+vm2xtAOLwvS9nh0x5Ea3NQfyltNmQPeou+B/4E2uIdhM0xSuTjOFjRzF3qZ/FpC+P5Q643/hzmS1zbM6H8LeFwHbUIy4xsTCABj1+d4RGYjA+FwEdUcW/LS1lmMmHCHEtz0j/v9Irh9VpVn4mUKcYzMTEm7te+sG2IKwK45lQ3l2B9QKx8C+juUB1AQPV4eBJDYN/HnnbJRYzlCjEyBUsqBRhS3ujbWooU6xM+mqk0ixGmQhpgweGN9odp5QczsX3GjBywAn4Dl0v7sXLC4PmhLqJGY3N8GIrIZv4gqlZj54ZLzep90rfIpyX9yluTIvnSU81teraYGdBQmnQ1icQJn7B72tPC9/dxKbURkpnW8r/Lb6XQB1xl+tJmC+/5WAf/SRSe1gc9YCdXfnIJAserEdILjHrLaOCnKTVscdTnn+d3kRSshf4jq4R3SPlAmN/X693lqoRUH9vRHuLtHkO5G7hHkNP6xsxPvFug9lH7xX1hBJLa4A2tuBkwIavnxuw8L8vBJ2S6i0ZJUCYh9zRy9unFEDKsnn226dNYgZSv2D3xBP9Gl+59lpbfDt7Y7glN6zjSXlXKU5MK9DvpZVHcgynF7SqRnxvKy6c5igOupcVsMjd1Fd+nOyE30c=
