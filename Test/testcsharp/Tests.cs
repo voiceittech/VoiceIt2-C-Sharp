@@ -181,7 +181,7 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             // Expire User Token
-            x = myVoiceIt.ExpireUserToken(userId);
+            x = myVoiceIt.ExpireUserTokens(userId);
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
