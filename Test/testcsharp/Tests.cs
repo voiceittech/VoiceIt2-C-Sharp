@@ -180,6 +180,13 @@ namespace testcsharpwrapper
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
+            // Expire User Token
+            x = myVoiceIt.ExpireUserToken(userId);
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 201);
+            AssertEqual(responseCode, "SUCC");
+
+
             // Delete Group
             x = myVoiceIt.DeleteGroup(groupId);
             (status, responseCode) = Deserialize(x);
