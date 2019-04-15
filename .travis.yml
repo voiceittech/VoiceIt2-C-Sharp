@@ -1,23 +1,23 @@
 language: csharp
 before_script:
-  - wget -O ~/videoEnrollmentB1.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentB1.mov
-  - wget -O ~/videoEnrollmentB2.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentB2.mov
-  - wget -O ~/videoEnrollmentB3.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentB3.mov
-  - wget -O ~/videoVerificationB1.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoVerificationB1.mov
-  - wget -O ~/videoEnrollmentC1.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentC1.mov
-  - wget -O ~/videoEnrollmentC2.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentC2.mov
-  - wget -O ~/videoEnrollmentC3.mov https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/videoEnrollmentC3.mov
-  - wget -O ~/enrollmentA1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentA1.wav
-  - wget -O ~/enrollmentA2.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentA2.wav
-  - wget -O ~/enrollmentA3.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentA3.wav
-  - wget -O ~/verificationA1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/verificationA1.wav
-  - wget -O ~/enrollmentC1.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentC1.wav
-  - wget -O ~/enrollmentC2.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentC2.wav
-  - wget -O ~/enrollmentC3.wav https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/enrollmentC3.wav
-  - wget -O ~/faceEnrollmentB1.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentB1.mp4
-  - wget -O ~/faceEnrollmentB2.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentB2.mp4
-  - wget -O ~/faceEnrollmentB3.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceEnrollmentB3.mp4
-  - wget -O ~/faceVerificationB1.mp4 https://s3.amazonaws.com/voiceit-api2-testing-files/test-data/faceVerificationB1.mp4
+  - wget -O ~/videoEnrollmentB1.mov https://drive.voiceit.io/files/videoEnrollmentB1.mov
+  - wget -O ~/videoEnrollmentB2.mov https://drive.voiceit.io/files/videoEnrollmentB2.mov
+  - wget -O ~/videoEnrollmentB3.mov https://drive.voiceit.io/files/videoEnrollmentB3.mov
+  - wget -O ~/videoVerificationB1.mov https://drive.voiceit.io/files/videoVerificationB1.mov
+  - wget -O ~/videoEnrollmentC1.mov https://drive.voiceit.io/files/videoEnrollmentC1.mov
+  - wget -O ~/videoEnrollmentC2.mov https://drive.voiceit.io/files/videoEnrollmentC2.mov
+  - wget -O ~/videoEnrollmentC3.mov https://drive.voiceit.io/files/videoEnrollmentC3.mov
+  - wget -O ~/enrollmentA1.wav https://drive.voiceit.io/files/enrollmentA1.wav
+  - wget -O ~/enrollmentA2.wav https://drive.voiceit.io/files/enrollmentA2.wav
+  - wget -O ~/enrollmentA3.wav https://drive.voiceit.io/files/enrollmentA3.wav
+  - wget -O ~/verificationA1.wav https://drive.voiceit.io/files/verificationA1.wav
+  - wget -O ~/enrollmentC1.wav https://drive.voiceit.io/files/enrollmentC1.wav
+  - wget -O ~/enrollmentC2.wav https://drive.voiceit.io/files/enrollmentC2.wav
+  - wget -O ~/enrollmentC3.wav https://drive.voiceit.io/files/enrollmentC3.wav
+  - wget -O ~/faceEnrollmentB1.mp4 https://drive.voiceit.io/files/faceEnrollmentB1.mp4
+  - wget -O ~/faceEnrollmentB2.mp4 https://drive.voiceit.io/files/faceEnrollmentB2.mp4
+  - wget -O ~/faceEnrollmentB3.mp4 https://drive.voiceit.io/files/faceEnrollmentB3.mp4
+  - wget -O ~/faceVerificationB1.mp4 https://drive.voiceit.io/files/faceVerificationB1.mp4
 script:
   - cd Test && cp ../VoiceIt2.cs testcsharp/VoiceIt2API.cs && nuget restore && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
 after_success:
