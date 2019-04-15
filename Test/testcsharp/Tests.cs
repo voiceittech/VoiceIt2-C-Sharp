@@ -205,7 +205,7 @@ namespace testcsharpwrapper
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
-            Console.WriteLine("****Test Basics All Succeeded****");
+            Console.WriteLine("**** Test Basics All Succeeded ****");
 
 
             /**
@@ -356,7 +356,7 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
             AssertEqual(userId, userId1);
 
-            Console.WriteLine("****Test Video All Succeeded****");
+            Console.WriteLine("**** Test Video All Succeeded ****");
             myVoiceIt.DeleteAllVideoEnrollments(userId1);
             myVoiceIt.DeleteAllVideoEnrollments(userId2);
             myVoiceIt.DeleteUser(userId1);
@@ -480,7 +480,7 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
             AssertEqual(userId, userId1);
 
-            Console.WriteLine("****Test Voice All Succeeded****");
+            Console.WriteLine("**** Test Voice All Succeeded ****");
             myVoiceIt.DeleteAllVoiceEnrollments(userId1);
             myVoiceIt.DeleteAllVoiceEnrollments(userId2);
             myVoiceIt.DeleteUser(userId1);
@@ -583,7 +583,7 @@ namespace testcsharpwrapper
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
-            Console.WriteLine("****Test Face All Succeeded****");
+            Console.WriteLine("**** Test Face All Succeeded ****");
 
             /**
              ****Test Delete All ****
@@ -594,7 +594,7 @@ namespace testcsharpwrapper
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
-            Console.WriteLine("****Test Delete All Succeeded****");
+            Console.WriteLine("**** Test Delete All Succeeded ****");
 
             myVoiceIt.DeleteUser(userId1);
             myVoiceIt.DeleteUser(userId2);
