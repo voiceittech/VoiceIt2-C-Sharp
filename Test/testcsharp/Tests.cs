@@ -280,24 +280,6 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
             AssertEqual(userId, userId1);
 
-            // Test Delete Video Enrollments Individually
-            x = myVoiceIt.DeleteVideoEnrollment(userId1, enrollmentId1);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
-            x = myVoiceIt.DeleteVideoEnrollment(userId1, enrollmentId2);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
-            x = myVoiceIt.DeleteVideoEnrollment(userId1, enrollmentId3);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
-            // Test Delete All Video Enrollments for User
-            x = myVoiceIt.DeleteAllVideoEnrollments(userId2);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
             // Reset for ByURL
             x = myVoiceIt.DeleteGroup(groupId);
             x = myVoiceIt.DeleteUser(userId1);
@@ -357,8 +339,8 @@ namespace testcsharpwrapper
             AssertEqual(userId, userId1);
 
             Console.WriteLine("**** Test Video All Succeeded ****");
-            myVoiceIt.DeleteAllVideoEnrollments(userId1);
-            myVoiceIt.DeleteAllVideoEnrollments(userId2);
+            myVoiceIt.DeleteAllEnrollments(userId1);
+            myVoiceIt.DeleteAllEnrollments(userId2);
             myVoiceIt.DeleteUser(userId1);
             myVoiceIt.DeleteUser(userId2);
             myVoiceIt.DeleteGroup(groupId);
@@ -481,8 +463,8 @@ namespace testcsharpwrapper
             AssertEqual(userId, userId1);
 
             Console.WriteLine("**** Test Voice All Succeeded ****");
-            myVoiceIt.DeleteAllVoiceEnrollments(userId1);
-            myVoiceIt.DeleteAllVoiceEnrollments(userId2);
+            myVoiceIt.DeleteAllEnrollments(userId1);
+            myVoiceIt.DeleteAllEnrollments(userId2);
             myVoiceIt.DeleteUser(userId1);
             myVoiceIt.DeleteUser(userId2);
             myVoiceIt.DeleteGroup(groupId);
@@ -562,23 +544,7 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
             AssertEqual(userId, userId1);
 
-            // Delete Face Enrollment
-            x = myVoiceIt.DeleteFaceEnrollment(userId1, faceEnrollmentId1);
-            (status, responseCode) = Deserialize(x);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
-            x = myVoiceIt.DeleteFaceEnrollment(userId1, faceEnrollmentId2);
-            (status, responseCode) = Deserialize(x);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
-            x = myVoiceIt.DeleteFaceEnrollment(userId1, faceEnrollmentId3);
-            (status, responseCode) = Deserialize(x);
-            AssertEqual(status, 200);
-            AssertEqual(responseCode, "SUCC");
-
-            x = myVoiceIt.DeleteAllFaceEnrollments(userId2);
+            x = myVoiceIt.DeleteAllEnrollments(userId2);
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");

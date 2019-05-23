@@ -9,7 +9,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
-        const string VERSION = "2.3.0";
+        const string VERSION = "2.4.0";
         string notificationUrl = "";
         RestClient client;
 
@@ -413,96 +413,6 @@ namespace VoiceIt2API
             request.AddParameter("phrase", phrase);
             request.AddParameter("fileUrl", fileUrl);
 
-            if (notificationUrl != "")
-            {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteVoiceEnrollment(string userId, int enrollmentId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/voice/" + userId + "/" + enrollmentId.ToString(),
-                Method = RestSharp.Method.DELETE
-            };
-            if (notificationUrl != "")
-            {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteFaceEnrollment(string userId, int faceEnrollmentId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/face/" + userId + "/" + faceEnrollmentId.ToString(),
-                Method = RestSharp.Method.DELETE
-            };
-            if (notificationUrl != "")
-            {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteVideoEnrollment(string userId, int enrollmentId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/video/" + userId + "/" + enrollmentId.ToString(),
-                Method = RestSharp.Method.DELETE
-            };
-            if (notificationUrl != "")
-            {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteAllVoiceEnrollments(string userId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/" + userId + "/voice",
-                Method = RestSharp.Method.DELETE
-            };
-            if (notificationUrl != "")
-            {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteAllFaceEnrollments(string userId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/" + userId + "/face",
-                Method = RestSharp.Method.DELETE
-            };
-            if (notificationUrl != "")
-            {
-              request.AddParameter("notificationURL", notificationUrl);
-            }
-            IRestResponse response = client.Execute(request);
-            return Task.FromResult(response.Content).GetAwaiter().GetResult();
-        }
-
-        public string DeleteAllVideoEnrollments(string userId)
-        {
-            var request = new RestRequest
-            {
-                Resource = "/enrollments/" + userId + "/video",
-                Method = RestSharp.Method.DELETE
-            };
             if (notificationUrl != "")
             {
               request.AddParameter("notificationURL", notificationUrl);
