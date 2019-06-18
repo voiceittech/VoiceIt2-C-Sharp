@@ -10,7 +10,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
-        const string VERSION = "2.4.0";
+        const string VERSION = "2.5.0";
         string notificationUrl = "";
         RestClient client;
 
