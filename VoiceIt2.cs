@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.IO;
 using System.Threading.Tasks;
 using RestSharp;
@@ -16,6 +17,17 @@ namespace VoiceIt2API
         public VoiceIt2(string apiKey, string apiToken)
         {
             client = new RestClient();
+            client.BaseUrl = new Uri(BASE_URL);
+            client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
+            client.AddDefaultHeader("platformId", "30");
+            client.AddDefaultHeader("platformVersion", VERSION);
+        }
+
+        // Overloaded constructor for proxy support
+        public VoiceIt2(string apiKey, string apiToken, string proxyUrl, int proxyPort)
+        {
+            client = new RestClient();
+            client.Proxy = new WebProxy(proxyUrl, proxyPort);
             client.BaseUrl = new Uri(BASE_URL);
             client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
             client.AddDefaultHeader("platformId", "30");
