@@ -10,7 +10,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
-        const string VERSION = "2.5.0";
+        const string VERSION = "2.5.1";
         string notificationUrl = "";
         RestClient client;
 
@@ -18,6 +18,15 @@ namespace VoiceIt2API
         {
             client = new RestClient();
             client.BaseUrl = new Uri(BASE_URL);
+            client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
+            client.AddDefaultHeader("platformId", "30");
+            client.AddDefaultHeader("platformVersion", VERSION);
+        }
+
+        public VoiceIt2(string apiKey, string apiToken, string customUrl)
+        {
+            client = new RestClient();
+            client.BaseUrl = new Uri(customUrl);
             client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
             client.AddDefaultHeader("platformId", "30");
             client.AddDefaultHeader("platformVersion", VERSION);
