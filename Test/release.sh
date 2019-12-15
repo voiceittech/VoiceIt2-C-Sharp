@@ -109,7 +109,7 @@ then
         </dependencies>
       </metadata>
       <files>
-        <file src="'$here'/netstandard2.0/VoiceIt.dll" target="lib/netstandard2.0/VoiceIt.dll" />
+        <file src="'$here'/netstandard2.0/VoiceIt2.dll" target="lib/netstandard2.0/VoiceIt2.dll" />
       </files>
     </package>' > VoiceIt.$version.nuspec
 
