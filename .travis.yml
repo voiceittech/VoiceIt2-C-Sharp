@@ -19,7 +19,7 @@ before_script:
   - wget -O ~/faceEnrollmentB3.mp4 https://drive.voiceit.io/files/faceEnrollmentB3.mp4
   - wget -O ~/faceVerificationB1.mp4 https://drive.voiceit.io/files/faceVerificationB1.mp4
 script:
-  - cd Test && cp ../VoiceIt2.cs testcsharp/VoiceIt2API.cs && nuget restore && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
+  - cd Test && cp ../VoiceIt2.cs testcsharp/VoiceIt2.cs && nuget restore && msbuild && cd testcsharp/bin/Debug && mono testcsharp2.exe
 after_success:
   - curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
   - sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
