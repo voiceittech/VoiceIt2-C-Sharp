@@ -86,7 +86,7 @@ then
     cp /home/travis/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ./VoiceIt.cs
 
     nuget restore
-    msbuild
+    msbuild VoiceIt.csproj
 
     cd obj/Debug
     here=$(pwd)
