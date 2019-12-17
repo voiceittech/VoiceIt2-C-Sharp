@@ -1,4 +1,5 @@
 language: csharp
+dist: trusty
 before_script:
   - wget -O ~/videoEnrollmentB1.mov https://drive.voiceit.io/files/videoEnrollmentB1.mov
   - wget -O ~/videoEnrollmentB2.mov https://drive.voiceit.io/files/videoEnrollmentB2.mov
@@ -23,9 +24,9 @@ script:
 after_success:
   - curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
   - sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-  - sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+  - sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
   - sudo apt-get update
-  - sudo apt-get install dotnet-sdk-2.1.6
+  - sudo apt-get install dotnet-sdk-2.1.4
   - cd /home/travis/build/voiceittech/VoiceIt2-C-Sharp/Test && ./release.sh
 notifications:
   slack:
