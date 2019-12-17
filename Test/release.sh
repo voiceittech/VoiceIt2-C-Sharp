@@ -64,7 +64,7 @@ then
   then
 
     unzip VoiceIt2.zip
-    cd Voiceit2
+    cd VoiceIt2
 
     echo '<Project Sdk="Microsoft.NET.Sdk">
 
@@ -86,7 +86,7 @@ then
     cp /home/travis/build/voiceittech/VoiceIt2-C-Sharp/VoiceIt2.cs ./VoiceIt.cs
 
     nuget restore
-    msbuild VoiceIt.csproj
+    msbuild
 
     cd obj/Debug
     here=$(pwd)
