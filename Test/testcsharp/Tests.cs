@@ -218,38 +218,28 @@ namespace testcsharpwrapper
              ****Test Subaccounts****
             **/
             x = myVoiceIt.CreateUnmanagedSubAccount("Test", "Sharp", "", "", "");
-            int status = 0;
-            string responseCode = "";
             (status, responseCode) = Deserialize(x);
             string subAccountUnmanagedAPIKey = GetAPIKey(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
             x = myVoiceIt.CreateManagedSubAccount("Test", "Sharp", "", "", "");
-            int status = 0;
-            string responseCode = "";
             (status, responseCode) = Deserialize(x);
             string subAccountManagedAPIKey = GetAPIKey(x);
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
             x = myVoiceIt.RegenerateSubAccountAPIToken(subAccountManagedAPIKey);
-            int status = 0;
-            string responseCode = "";
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
             x = myVoiceIt.DeleteSubAccount(subAccountManagedAPIKey);
-            int status = 0;
-            string responseCode = "";
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");
 
             x = myVoiceIt.DeleteSubAccount(subAccountUnmanagedAPIKey);
-            int status = 0;
-            string responseCode = "";
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);
             AssertEqual(responseCode, "SUCC");

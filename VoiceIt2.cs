@@ -178,7 +178,7 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string Create()
+        public string CreateUser()
         {
             var request = new RestRequest
             {
