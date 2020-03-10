@@ -69,6 +69,13 @@ namespace testcsharpwrapper
             return dobj["userId"].ToString();
         }
 
+        static string GetAPIKey(string JSONString)
+        {
+            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            dynamic dobj = jsonSerializer.Deserialize<dynamic>(JSONString);
+            return dobj["apiKey"].ToString();
+        }
+
         static string GetGroupId(string JSONString)
         {
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
@@ -206,8 +213,49 @@ namespace testcsharpwrapper
             AssertEqual(responseCode, "SUCC");
 
             Console.WriteLine("**** Test Basics All Succeeded ****");
+            
+            /**
+             ****Test Subaccounts****
+            **/
+            x = myVoiceIt.CreateUnmanagedSubAccount("Test", "Sharp", "", "", "");
+            int status = 0;
+            string responseCode = "";
+            (status, responseCode) = Deserialize(x);
+            string subAccountUnmanagedAPIKey = GetAPIKey(x);
+            AssertEqual(status, 201);
+            AssertEqual(responseCode, "SUCC");
 
+            x = myVoiceIt.CreateManagedSubAccount("Test", "Sharp", "", "", "");
+            int status = 0;
+            string responseCode = "";
+            (status, responseCode) = Deserialize(x);
+            string subAccountManagedAPIKey = GetAPIKey(x);
+            AssertEqual(status, 201);
+            AssertEqual(responseCode, "SUCC");
 
+            x = myVoiceIt.RegenerateSubAccountAPIToken(subAccountManagedAPIKey);
+            int status = 0;
+            string responseCode = "";
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 200);
+            AssertEqual(responseCode, "SUCC");
+
+            x = myVoiceIt.DeleteSubAccount(subAccountManagedAPIKey);
+            int status = 0;
+            string responseCode = "";
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 200);
+            AssertEqual(responseCode, "SUCC");
+
+            x = myVoiceIt.DeleteSubAccount(subAccountUnmanagedAPIKey);
+            int status = 0;
+            string responseCode = "";
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 200);
+            AssertEqual(responseCode, "SUCC");
+            
+
+            Console.WriteLine("**** Test Subaccounts All Succeeded ****");
             /**
              ****Test Video****
             **/

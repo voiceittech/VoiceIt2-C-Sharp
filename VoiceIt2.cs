@@ -10,7 +10,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
-        const string VERSION = "2.5.4";
+        const string VERSION = "2.6.0";
         string notificationUrl = "";
         RestClient client;
 
@@ -93,7 +93,92 @@ namespace VoiceIt2API
             return Task.FromResult(response.Content).GetAwaiter().GetResult();
         }
 
-        public string CreateUser()
+        public string CreateUnmanagedSubAccount(string firstName, string lastName, string email, string password, string contentLanguage)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/subaccount/unmanaged",
+                Method = RestSharp.Method.POST
+            };
+
+            if(firstName != "")
+                request.AddParameter("firstName", firstName);
+            if(lastName != "")
+                request.AddParameter("lastName", lastName);
+            if(email != "")
+                request.AddParameter("email", email);
+            if(password != "")
+                request.AddParameter("password", password);
+            if(contentLanguage != "")
+                request.AddParameter("contentLanguage", contentLanguage);
+            
+            if (notificationUrl != "")
+            {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string CreateManagedSubAccount(string firstName, string lastName, string email, string password, string contentLanguage)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/subaccount/managed",
+                Method = RestSharp.Method.POST
+            };
+
+            if(firstName != "")
+                request.AddParameter("firstName", firstName);
+            if(lastName != "")
+                request.AddParameter("lastName", lastName);
+            if(email != "")
+                request.AddParameter("email", email);
+            if(password != "")
+                request.AddParameter("password", password);
+            if(contentLanguage != "")
+                request.AddParameter("contentLanguage", contentLanguage);
+            
+            if (notificationUrl != "")
+            {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string RegenerateSubAccountAPIToken(string subAccountAPIKey)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/subaccount/" + subAccountAPIKey,
+                Method = RestSharp.Method.POST
+            };
+            
+            if (notificationUrl != "")
+            {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string DeleteSubAccount(string subAccountAPIKey)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/subaccount/" + subAccountAPIKey,
+                Method = RestSharp.Method.DELETE
+            };
+            if (notificationUrl != "")
+            {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string Create()
         {
             var request = new RestRequest
             {
