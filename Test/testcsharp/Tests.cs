@@ -229,6 +229,11 @@ namespace testcsharpwrapper
             AssertEqual(status, 201);
             AssertEqual(responseCode, "SUCC");
 
+            x = myVoiceIt.SwitchSubAccountType(subAccountManagedAPIKey);
+            (status, responseCode) = Deserialize(x);
+            AssertEqual(status, 200);
+            AssertEqual(responseCode, "SUCC");
+
             x = myVoiceIt.RegenerateSubAccountAPIToken(subAccountManagedAPIKey);
             (status, responseCode) = Deserialize(x);
             AssertEqual(status, 200);

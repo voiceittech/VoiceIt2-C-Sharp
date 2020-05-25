@@ -10,7 +10,7 @@ namespace VoiceIt2API
     public class VoiceIt2
     {
         const string BASE_URL = "https://api.voiceit.io";
-        const string VERSION = "2.6.0";
+        const string VERSION = "2.7.0";
         string notificationUrl = "";
         RestClient client;
 
@@ -139,6 +139,21 @@ namespace VoiceIt2API
             if(contentLanguage != "")
                 request.AddParameter("contentLanguage", contentLanguage);
             
+            if (notificationUrl != "")
+            {
+              request.AddParameter("notificationURL", notificationUrl);
+            }
+            IRestResponse response = client.Execute(request);
+            return Task.FromResult(response.Content).GetAwaiter().GetResult();
+        }
+
+        public string SwitchSubAccountType(string subAccountAPIKey)
+        {
+            var request = new RestRequest
+            {
+                Resource = "/subaccount/" + subAccountAPIKey + "/switchType",
+                Method = RestSharp.Method.POST
+            };
             if (notificationUrl != "")
             {
               request.AddParameter("notificationURL", notificationUrl);
