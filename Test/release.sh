@@ -78,7 +78,7 @@ then
       </PropertyGroup>
 
       <ItemGroup>
-        <PackageReference Include="RestSharp" Version="106.3.1" />
+        <PackageReference Include="RestSharp" Version="106.12.0" />
       </ItemGroup>
 
     </Project>' > VoiceIt.csproj
@@ -104,7 +104,7 @@ then
         <iconUrl>https://raw.githubusercontent.com/voiceittech/VoiceIt2-C-Sharp/master/voiceitlogo64.png</iconUrl>
         <dependencies>
           <group targetFramework=".NETStandard2.0">
-            <dependency id="RestSharp" version="106.3.1" exclude="Build,Analyzers" />
+            <dependency id="RestSharp" version="106.12.0" exclude="Build,Analyzers" />
           </group>
         </dependencies>
       </metadata>
