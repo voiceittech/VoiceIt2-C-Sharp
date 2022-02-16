@@ -36,7 +36,7 @@ namespace VoiceIt2API
         {
             client = new RestClient();
             client.Proxy = new WebProxy(proxyUrl, proxyPort);
-            client.BaseUrl = new Uri(BASE_URL);
+            client.BaseUrl = new Uri("https://api.voiceit.io");
             client.Authenticator = new HttpBasicAuthenticator(apiKey, apiToken);
             client.AddDefaultHeader("platformId", "30");
             client.AddDefaultHeader("platformVersion", VERSION);
